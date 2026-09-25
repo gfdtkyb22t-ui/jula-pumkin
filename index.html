@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Julaaa's Pumpkin Season 🎃</title>
+<style>
+:root{--cream:#fff7ea;--ink:#3a2418;--orange:#d97832;--deep:#7c3f20;--gold:#e9a94a;--leaf:#7b8b3a}
+*{box-sizing:border-box} body{margin:0;font-family:Georgia,serif;background:radial-gradient(circle at 50% 10%,#fff9ed,#f4d3a5 55%,#b96d3b);color:var(--ink);min-height:100vh;overflow-x:hidden}
+#leaves{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}.leaf{position:absolute;top:-50px;font-size:24px;animation:fall linear forwards;opacity:.8}
+@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(620deg);opacity:.1}}
+.wrap{max-width:850px;margin:auto;padding:24px 16px 70px;position:relative;z-index:2}
+.card{background:rgba(255,249,238,.92);border:2px solid rgba(124,63,32,.18);border-radius:28px;box-shadow:0 18px 55px #6f3b2440;padding:28px;margin:18px 0;backdrop-filter:blur(8px)}
+.screen{display:none;animation:in .55s ease}.screen.active{display:block}@keyframes in{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(38px,8vw,72px);line-height:.95;margin:10px 0;color:var(--deep)}h2{font-size:34px;margin:8px 0 16px}p{font-size:18px;line-height:1.65}
+button{border:0;border-radius:999px;padding:14px 22px;font-size:16px;font-weight:700;cursor:pointer;background:var(--orange);color:white;box-shadow:0 7px 0 #a54e22;transition:.2s}
+button:hover{transform:translateY(-2px)}button:active{transform:translateY(4px);box-shadow:0 3px 0 #a54e22}.secondary{background:#fff;color:var(--deep);border:2px solid #dca36e;box-shadow:none}.tiny{font-size:13px;opacity:.65}
+.center{text-align:center}.emoji{font-size:70px;display:block}.progress{height:10px;background:#ead5bd;border-radius:99px;overflow:hidden;margin:10px 0 25px}.bar{height:100%;width:0;background:linear-gradient(90deg,#c76129,#efb24f);transition:.5s}
+.options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.option{background:#fff;border:2px solid #ead2b5;color:var(--ink);box-shadow:none}.option.selected{border-color:var(--orange);background:#fff0df}
+.hidden-pumpkin{position:relative;height:230px;border-radius:22px;background:linear-gradient(#e7bd83,#b86f3d);overflow:hidden;cursor:pointer}
+.hpump{position:absolute;font-size:40px;transition:.25s}.hint{font-size:14px;opacity:.7}
+.boquet{display:flex;justify-content:center;align-items:end;gap:7px;height:240px;margin:10px auto;position:relative}.flower{font-size:55px;filter:drop-shadow(0 5px 2px #63351e44);cursor:pointer;transition:.2s}.flower:hover{transform:translateY(-10px) rotate(-4deg)}.stem{position:absolute;bottom:22px;width:180px;height:145px;border-left:4px solid #687332;border-right:4px solid #687332;transform:rotate(2deg);border-radius:50%}
+.letter{background:#fffaf0;border:1px solid #d9b17f;padding:25px;border-radius:14px;box-shadow:inset 0 0 35px #e4bd8140;text-align:left}.sig{font-size:24px;color:var(--deep)}
+#no{position:relative}.floating{position:fixed!important;z-index:50}
+.confetti{position:fixed;top:-20px;font-size:22px;z-index:100;animation:conf 2.8s linear forwards}@keyframes conf{to{transform:translate(var(--x),110vh) rotate(720deg);opacity:0}}
+.badge{display:inline-block;background:#7c3f20;color:#fff;border-radius:99px;padding:7px 13px;font-size:13px;letter-spacing:.5px}
+@media(max-width:600px){.card{padding:22px 17px}.options{grid-template-columns:1fr}.flower{font-size:45px}}
+</style>
+</head>
+<body>
+<div id="leaves"></div>
+<div class="wrap">
+
+<section class="screen active" id="s0"><div class="card center">
+<span class="emoji">🎃🍂</span><span class="badge">A VERY IMPORTANT AUTUMN MATTER</span>
+<h1>hiiiii julaaa</h1>
+<p>you've officially been summoned for a tiny autumn surprise...</p>
+<p>there are a few extremely serious pumpkin-related questions you need to answer first.</p>
+<button onclick="go(1)">enter the pumpkin season →</button>
+<p class="tiny">warning: excessive cuteness may occur</p>
+</div></section>
+
+<section class="screen" id="s1"><div class="card">
+<div class="progress"><div class="bar"></div></div>
+<h2>🍁 pumpkin compatibility test</h2>
+<p>question 1: what is the correct autumn activity?</p>
+<div class="options">
+<button class="option" onclick="pick(this,2)">watch a film wrapped in a blanket</button>
+<button class="option" onclick="pick(this,2)">drink something warm and yap for hours</button>
+<button class="option" onclick="pick(this,2)">go on a little autumn adventure</button>
+<button class="option" onclick="pick(this,2)">all of the above because obviously</button>
+</div>
+</div></section>
+
+<section class="screen" id="s2"><div class="card center">
+<div class="progress"><div class="bar"></div></div>
+<h2>🎃 emergency pumpkin search</h2>
+<p>there's one hidden pumpkin somewhere below. find it 👀</p>
+<div class="hidden-pumpkin" id="hunt" onclick="foundPumpkin(event)">
+  <span class="hpump" style="left:12%;top:25%">🍂</span><span class="hpump" style="left:73%;top:13%">🍁</span>
+  <span class="hpump" style="left:44%;top:63%">🌰</span><span class="hpump" style="left:82%;top:70%">🍂</span>
+  <span class="hpump" style="left:25%;top:75%">🍁</span>
+  <span class="hpump" id="target" style="left:58%;top:35%">🎃</span>
+</div>
+<p class="hint" id="huntHint">i swear it's in there somewhere...</p>
+</div></section>
+
+<section class="screen" id="s3"><div class="card center">
+<div class="progress"><div class="bar"></div></div>
+<h2>💐 autumn bouquet unlocked</h2>
+<p>okayyy you found it. now tap the flowers...</p>
+<div class="boquet">
+<div class="stem"></div>
+<span class="flower" onclick="flower('🌻')">🌻</span><span class="flower" onclick="flower('🌷')">🌷</span>
+<span class="flower" onclick="flower('🌼')">🌼</span><span class="flower" onclick="flower('🌻')">🌻</span><span class="flower" onclick="flower('🌹')">🌹</span>
+</div>
+<p id="flowerMsg">each one has a little message hiding inside 👀</p>
+<button onclick="go(4)">i think i'm ready...</button>
+</div></section>
+
+<section class="screen" id="s4"><div class="card center">
+<div class="progress"><div class="bar"></div></div>
+<span class="emoji">🍂</span>
+<h2>one final question...</h2>
+<p>julaaa, after careful scientific investigation, the pumpkin committee has reached a conclusion.</p>
+<p><b>will you be my pumpkin for fall? 🎃❤️</b></p>
+<div style="min-height:100px;position:relative" id="buttons">
+<button onclick="yes()">YESSS 🎃🥹❤️</button>
+<button id="no" class="secondary" onmouseenter="moveNo()" onclick="moveNo()">no</button>
+</div>
+<p class="tiny">the committee would like to remind you that autumn is very short.</p>
+</div></section>
+
+<section class="screen" id="s5"><div class="card center">
+<span class="emoji">🎃💐🍂</span>
+<h1>SHE SAID YESSS</h1>
+<p>official pumpkin status: <b>JULA APPROVED</b> 🥹❤️</p>
+<div class="letter">
+<p>my sweet julaaa,</p>
+<p>i know this is only a little online thing, but i wanted to make something that actually felt like <i>ours</i> instead of just sending you a normal message and calling it a day.</p>
+<p>you genuinely make the ordinary parts of my days so much better. even with all the distance between us, somehow you still manage to feel like one of the closest people in my life. and now that autumn is here, i couldn't let pumpkin season happen without officially asking my favourite girl to be my pumpkin 🥹</p>
+<p>so yes, this is your completely official, highly professional, legally-not-a-real-document pumpkin appointment. your duties include being cute, letting me yap, accepting unlimited virtual hugs, and remaining my favourite person. compensation will be paid in love, silly messages and approximately a million hugs when we finally get to see each other.</p>
+<p>i love you so so much julaaa. thank you for being you, and thank you for making my life feel a little warmer even when you're far away. ❤️</p>
+<p class="sig">— your pumpkin's pumpkin 🎃<br>Naman</p>
+</div>
+<br><button onclick="certificate()">open your official certificate →</button>
+</div></section>
+
+<section class="screen" id="s6"><div class="card center">
+<span class="emoji">🏆🎃</span>
+<h2>OFFICIAL PUMPKIN CERTIFICATE</h2>
+<p>This certifies that</p><h1 style="font-size:48px">JULIA</h1>
+<p>has officially been appointed</p><h2>🎃 NAMAN'S PUMPKIN FOR FALL 🎃</h2>
+<p>valid for the entire autumn season<br>and subject to automatic renewal because you're cute.</p>
+<p>🍂 🥹 ❤️ 🎃 🍂</p>
+<button onclick="restart()">replay because that was cute</button>
+</div></section>
+
+</div>
+<script>
+let step=0;
+const msgs=["🌻 = one extra reason i adore you","🌷 = virtual hug loading... 100%","🌼 = you're actually so cute it's unfair","🌻 = pumpkin committee says you're perfect","🌹 = jmwahhh 😚"];
+function leaves(){
+ const box=document.getElementById('leaves');
+ setInterval(()=>{let e=document.createElement('span');e.className='leaf';e.textContent=['🍂','🍁','🍃'][Math.floor(Math.random()*3)];e.style.left=Math.random()*100+'vw';e.style.setProperty('--drift',(Math.random()*260-130)+'px');e.style.animationDuration=(5+Math.random()*7)+'s';box.appendChild(e);setTimeout(()=>e.remove(),13000)},350);
+}
+function go(n){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('s'+n).classList.add('active');step=n;document.querySelectorAll('.bar').forEach(b=>b.style.width=(n/4*100)+'%');window.scrollTo({top:0,behavior:'smooth'})}
+function pick(btn,n){document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');setTimeout(()=>go(n),450)}
+function foundPumpkin(e){if(e.target.id==='target'){e.stopPropagation();document.getElementById('huntHint').textContent='YOU FOUND ITTT 🎃 okay you might actually be qualified for this job';document.getElementById('target').style.transform='scale(1.5)';setTimeout(()=>go(3),800)}}
+function flower(x){let i=Math.floor(Math.random()*msgs.length);document.getElementById('flowerMsg').textContent=msgs[i]}
+function moveNo(){const b=document.getElementById('no');b.classList.add('floating');b.style.left=(Math.random()*70+10)+'vw';b.style.top=(Math.random()*70+15)+'vh';b.textContent=['no','are you sure?','nice try 😌','nopeee','not today 🍂'][Math.floor(Math.random()*5)]}
+function yes(){confetti();go(5)}
+function confetti(){for(let i=0;i<80;i++){let e=document.createElement('span');e.className='confetti';e.textContent=['🍂','🍁','🎃','❤️','✨','💐'][Math.floor(Math.random()*6)];e.style.left=Math.random()*100+'vw';e.style.setProperty('--x',(Math.random()*400-200)+'px');e.style.animationDuration=(1.5+Math.random()*2)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),4000)}}
+function certificate(){go(6)}
+function restart(){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('s0').classList.add('active');document.getElementById('no').classList.remove('floating');}
+leaves();
+</script>
+</body>
+</html>
